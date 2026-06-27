@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoItMacro.cs" />
+    <Compile Include="Macro\AutoItMacro.cs" />
     <Compile Include="Launchers\Direct.cs" />
     <Compile Include="Launchers\Steam.cs" />
+    <Compile Include="Macro\CMSv0_1\MessageBox.cs" />
+    <Compile Include="Macro\CMSv0_1\WindowManager.cs" />
     <Compile Include="ProcessResult.cs" />
     <Compile Include="PowerShellRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
