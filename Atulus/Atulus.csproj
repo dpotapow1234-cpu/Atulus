@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoItMacro.cs" />
+    <Compile Include="Launchers\Direct.cs" />
+    <Compile Include="Launchers\Steam.cs" />
+    <Compile Include="ProcessResult.cs" />
     <Compile Include="PowerShellRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

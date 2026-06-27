@@ -21,8 +21,12 @@ namespace Utills
             Console.WriteLine("STDERR:");
             Console.WriteLine(result.StandardError);
 
-            var autoIt = new AutoItMacro(
-    @"C:\AutoIt3\AutoIt3.exe");
+            Console.Write("Steam Launcher Path: ");
+            Console.WriteLine(Atulus.Launchers.Direct.GetSteamPath());
+            Console.Write("Epic Games Launcher Path: ");
+            Console.WriteLine(Atulus.Launchers.Direct.GetSteamPath());
+
+            var autoIt = new AutoItMacro(@"C:\AutoIt3\AutoIt3.exe");
 
             string script = "MsgBox(64, \"Test\", \"Hello from AutoIt\")" + "\r\n" +
                 "Sleep(2000)";

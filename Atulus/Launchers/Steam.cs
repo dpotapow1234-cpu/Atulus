@@ -5,24 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Atulus
+namespace Atulus.Launchers
 {
-    public class PowerShellRunner
+    public class Steam
     {
-        private readonly string _powerShellPath;
-        public PowerShellRunner(string powerShellPath = "powershell.exe")
+        private Process _client;
+        private string _steamPath;
+        public bool isRun = false;
+        
+        public Steam()
         {
-            _powerShellPath = powerShellPath;
+            _steamPath = Direct.GetSteamPath();
         }
 
-        public async Task<ProcessResult> ExecuteAsync(string script)
+        public async Task<ProcessResult> ExecuteAsync()
         {
-            var process = new Process
+            _client = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = _powerShellPath,
-                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command \"{script}\"",
+                    FileName = _steamPath,
+                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command ",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     RedirectStandardInput = false,
@@ -36,28 +39,30 @@ namespace Atulus
             var stdout = new StringBuilder();
             var stderr = new StringBuilder();
 
-            process.OutputDataReceived += (_, e) =>
+            _client.OutputDataReceived += (_, e) =>
             {
                 if (e.Data != null)
                     stdout.AppendLine(e.Data);
             };
 
-            process.ErrorDataReceived += (_, e) =>
+            _client.ErrorDataReceived += (_, e) =>
             {
                 if (e.Data != null)
                     stderr.AppendLine(e.Data);
             };
 
-            process.Start();
+            _client.Start();
+            isRun = true;
 
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+            _client.BeginOutputReadLine();
+            _client.BeginErrorReadLine();
 
-            process.WaitForExit();
+            _client.WaitForExit();
+            isRun = false;
 
             return new ProcessResult
             {
-                ExitCode = process.ExitCode,
+                ExitCode = _client.ExitCode,
                 StandardOutput = stdout.ToString(),
                 StandardError = stderr.ToString()
             };
