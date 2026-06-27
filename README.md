@@ -1,151 +1,91 @@
-Atulus
+# Atulus
 
-Custom Macro System (CMS) — библиотека и среда выполнения пользовательских макросов для автоматизации приложений и игр.
+**Atulus** is a lightweight automation framework and **Custom Macro System (CMS)** for Windows applications. It provides a simple and extensible environment for launching applications, executing automation scripts, managing Windows processes, and interacting with application windows.
 
-Описание
+The project is designed to automate repetitive tasks, streamline application startup, and simplify workflow automation through reusable macro components.
 
-Atulus представляет собой систему автоматизации, позволяющую запускать приложения через различные лаунчеры и выполнять пользовательские сценарии взаимодействия с окнами программ.
+## Features
 
-Проект ориентирован на автоматизацию повторяющихся действий, управление процессами Windows и запуск внешних сценариев.
+* Launch applications directly or through supported launchers
+* Steam launcher integration
+* Windows window management
+* AutoIt script execution
+* PowerShell script execution
+* Built-in message dialogs
+* Modular and extensible architecture
+* Support for custom automation workflows
 
-Возможности
-🚀 Запуск приложений напрямую
-🎮 Поддержка запуска через Steam
-🪟 Управление окнами Windows
-📜 Выполнение AutoIt-скриптов
-⚡ Запуск PowerShell-скриптов
-💬 Встроенные диалоговые окна
-🔧 Простое расширение собственными модулями
-Архитектура
-Atulus
-│
-├── Launchers
-│   ├── Direct
-│   └── Steam
-│
-├── Macro
-│   └── CMS v0.1
-│       ├── WindowManager
-│       ├── AutoItMacro
-│       └── MessageBox
-│
-├── Scripts
-│   └── *.au3
-│
-├── Utils
-│
-└── Program
-Основные компоненты
-Launchers
+## Components
 
-Отвечает за запуск приложений различными способами.
+### Launchers
 
-Поддерживаются:
+The launcher system provides multiple ways to start applications. Currently supported launchers include Direct and Steam, while the architecture allows additional integrations such as Epic Games Launcher, Ubisoft Connect, Battle.net, EA App, and GOG Galaxy.
 
-Direct Launcher
-Steam Launcher
+### Custom Macro System (CMS)
 
-В дальнейшем можно добавить:
+CMS is the core of the framework and provides reusable automation actions that can be combined into custom workflows.
 
-Epic Games
-Ubisoft Connect
-Battle.net
-EA App
-GOG Galaxy
-CMS (Custom Macro System)
+Included modules:
 
-Ядро библиотеки.
+* **WindowManager** – Find, wait for, activate, move, resize, minimize, and restore application windows.
+* **AutoItMacro** – Execute AutoIt (`.au3`) scripts for advanced UI automation.
+* **MessageBox** – Display standardized notification, confirmation, and error dialogs.
 
-Содержит набор готовых действий для автоматизации.
+### PowerShell Runner
 
-WindowManager
+Execute PowerShell commands and scripts for environment preparation, dependency management, or Windows automation tasks.
 
-Управление окнами:
+### Scripts
 
-поиск окна
-ожидание появления
-активация
-перемещение
-изменение размеров
-сворачивание/разворачивание
-AutoItMacro
+The `Scripts` directory contains AutoIt automation scripts used by the framework.
 
-Позволяет запускать AutoIt-скрипты (*.au3).
+Example:
 
-Используется для автоматизации пользовательского интерфейса.
-
-MessageBox
-
-Унифицированные окна сообщений.
-
-Используются для:
-
-уведомлений
-ошибок
-подтверждений
-PowerShellRunner
-
-Запуск PowerShell-команд и скриптов.
-
-Полезно для:
-
-подготовки окружения
-установки зависимостей
-автоматизации Windows
-Scripts
-
-Каталог пользовательских скриптов.
-
-Пример:
-
+```text
 Scripts/
     steam.au3
+```
 
-Здесь располагаются AutoIt-сценарии.
+## Example
 
-Использование
+Launch an application using the Steam launcher:
 
-Пример запуска приложения:
-
+```csharp
 var launcher = new SteamLauncher();
 
 launcher.Run(appId);
+```
 
-Запуск AutoIt-макроса:
+Execute an AutoIt macro:
 
+```csharp
 AutoItMacro.Run("Scripts/steam.au3");
-Назначение
+```
 
-Atulus предназначен для создания собственных систем автоматизации:
+## Extensibility
 
-автоматический запуск игр
-выполнение макросов
-управление окнами
-автоматизация действий пользователя
-запуск внешних инструментов
-создание собственных лаунчеров
-Расширяемость
+Atulus was designed with extensibility in mind. New launchers, macro types, automation modules, script engines, and workflow components can be added with minimal effort, making it suitable as a foundation for custom automation systems.
 
-Архитектура позволяет легко добавлять:
+## Requirements
 
-новые лаунчеры
-новые типы макросов
-собственные обработчики
-новые скриптовые движки
-Зависимости
-.NET
-AutoIt
-PowerShell (Windows)
-Планы развития
-поддержка Epic Games Launcher
-поддержка GOG Galaxy
-поддержка Ubisoft Connect
-поддержка Battle.net
-система плагинов
-JSON-конфигурация макросов
-очереди выполнения сценариев
-логирование
-асинхронное выполнение задач
-Лицензия
+* .NET
+* Windows
+* AutoIt
+* PowerShell
 
-Проект распространяется по лицензии LGPL-2.1.
+## Roadmap
+
+* Epic Games Launcher support
+* Ubisoft Connect support
+* Battle.net support
+* EA App support
+* GOG Galaxy support
+* Plugin system
+* JSON-based macro configuration
+* Workflow execution queues
+* Logging system
+* Asynchronous task execution
+
+## License
+
+This project is licensed under the **LGPL-2.1** License.
