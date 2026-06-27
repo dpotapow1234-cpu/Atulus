@@ -1,0 +1,12 @@
+Run("C:\Program Files (x86)\Steam\Steam.exe")
+; 1. Ожидание появления окна авторизации
+WinWaitActive("Войти в Steam")
+Sleep(500)
+; 2. Ввод логина (замените "YOUR_USERNAME" на ваш логин)
+Send("YOUR_USERNAME{TAB}")
+Sleep(500)
+; 3. Ввод логина (замените "YOUR_PASSWORD" на ваш логин)
+Send("YOUR_PASSWORD{ENTER}") 
+Sleep(10000)
+; 4. Ввод логина (замените "YOUR_GUARD" на ваш логин)
+Send("YOUR_GUARD{ENTER}")

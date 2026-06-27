@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="Atulus/Atulus.csproj" />
-  <Project Path="Utills/Utills.csproj" />
+  <Project Path="Atulus/Atulus.csproj" Id="62be4e69-4627-4eac-a2be-f28c19675c47" />
+  <Project Path="Utills/Utills.csproj" Id="0baa7424-ef23-4365-a4e1-0f22148c9ca0" />
 </Solution>
