@@ -18,14 +18,14 @@ namespace Atulus.Launchers
             _steamPath = Direct.GetSteamPath();
         }
 
-        public async Task<ProcessResult> ExecuteAsync(string args)
+        public async Task<ProcessResult> ExecuteAsync(string args = "-NoProfile -ExecutionPolicy Bypass -Command ")
         {
             _client = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = _steamPath + "\\steam.exe",
-                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command " + args,
+                    Arguments =  args,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     RedirectStandardInput = false,

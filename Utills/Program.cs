@@ -1,18 +1,29 @@
 ﻿using Atulus;
 using Atulus.Macro.CMSv0_1;
+using AutoIt;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Utills
 {
     internal class Program
     {
+        // Post message asynchronously
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        // WinAPI Constants
+        const uint WM_CHAR = 0x0102;
+
+
         static async Task Main(string[] args)
         {
             PowerShellRunner runner = new PowerShellRunner();
@@ -31,52 +42,29 @@ namespace Utills
             Console.WriteLine(Atulus.Launchers.Direct.GetEpicGamesPath());
 
             var steam = new Atulus.Launchers.Steam();
-            await Task.Factory.StartNew(() => steam.ExecuteAsync("runas -applaunch 730"), TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(() => steam.ExecuteAsync("runas -applaunch 730 /sandbox"), TaskCreationOptions.LongRunning);
 
             var autoIt = new AutoItMacro(@"C:\AutoIt3\AutoIt3.exe");
 
-            #region MacroV1
+            #region AutoIt
 
             Console.WriteLine("Waiting for Steam to become active...");
+            Console.WriteLine(AutoItX.WinActivate("Войти в Steam"));
             // Waits up to 10 seconds for Steam
+            IntPtr steamHandle = Win32Native.FindWindow("Войти в Steam", null);
             bool success = WindowManager.WinWaitActive("Войти в Steam", 10);
             // 1. Find the top-level Notepad window
-            IntPtr steamHandle = Win32Native.FindWindow("Войти в Steam", null);
-
 
             if (success || steamHandle != IntPtr.Zero)
             {
                 Console.WriteLine("Steam is active! Proceeding with actions...");
+         
 
-                TcpTable.Execute();
+                Console.WriteLine(AutoItX.WinGetClassList("Войти в Steam"));
+                Console.WriteLine(AutoItX.WinActivate("Войти в Steam"));
+                Console.WriteLine(AutoItX.WinGetHandle("Войти в Steam"));
+                WinApiClicker.SendTextViaPostMessage(AutoItX.WinGetHandle("Войти в Steam"), "123");
 
-                // 1. Указываем порт, который мы открыли в шаге 2
-                ChromeOptions options = new ChromeOptions();
-                options.DebuggerAddress = "127.0.0.1:51253";
-
-
-                // 2. Подключаем Selenium к существующему браузеру
-                IWebDriver driver = new ChromeDriver(options);
-
-                try
-                {
-                    // Теперь можно работать с драйвером как обычно
-                    Console.WriteLine("Успешно подключились к: " + driver.Title);
-
-                    // Пример: переход на сайт
-                    driver.Navigate().GoToUrl("https://www.google.com");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Ошибка: " + ex.Message);
-                }
-                finally
-                {
-                    // НЕ вызывайте driver.Quit(), иначе браузер закроется. 
-                    // Используйте driver.Close(), если хотите закрыть только текущую вкладку.
-
-                    driver.Close();
-                }
             }
             else
             {

@@ -46,8 +46,10 @@
     <Compile Include="Launchers\Steam.cs" />
     <Compile Include="Macro\CMSv0_1\MessageBox.cs" />
     <Compile Include="Macro\CMSv0_1\TcpTable.cs" />
+    <Compile Include="Macro\CMSv0_1\Win32Input.cs" />
     <Compile Include="Macro\CMSv0_1\Win32Native.cs" />
     <Compile Include="Macro\CMSv0_1\WinApiClicker.cs" />
+    <Compile Include="Macro\CMSv0_1\WinApiInput.cs" />
     <Compile Include="Macro\CMSv0_1\WindowManager.cs" />
     <Compile Include="ProcessResult.cs" />
     <Compile Include="PowerShellRunner.cs" />
